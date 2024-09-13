@@ -36,7 +36,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Pokemon pokemon = pokemonList.get(holder.getAdapterPosition());
-        holder.bind(pokemon);
+
+        ImageView ivPokemon = holder.itemView.findViewById(R.id.ivPokemon);
+        TextView tvPokemon = holder.itemView.findViewById(R.id.tvPokemon);
+        ivPokemon.setImageResource(pokemon.getImageResId());
+        tvPokemon.setText(pokemon.getName());
     }
 
     @Override

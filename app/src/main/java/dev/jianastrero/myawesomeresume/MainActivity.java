@@ -1,57 +1,28 @@
 package dev.jianastrero.myawesomeresume;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
-import java.util.List;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import dev.jianastrero.myawesomeresume.adapter.MyAdapter;
-import dev.jianastrero.myawesomeresume.model.Pokemon;
+import dev.jianastrero.myawesomeresume.sp.AppSharedPreferences;
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView myRecyclerView;
-    MyAdapter myAdapter;
-
-    List<Pokemon> pokemonList = List.of(
-            new Pokemon("Bulbasaur", R.drawable.charizard),
-            new Pokemon("Charmander", R.drawable.settings_ic_edit),
-            new Pokemon("Squirtle", R.drawable.charizard),
-            new Pokemon("Pikachu", R.drawable.settings_ic_edit),
-            new Pokemon("Eevee", R.drawable.charizard),
-            new Pokemon("Jigglypuff", R.drawable.settings_ic_edit),
-            new Pokemon("Meowth", R.drawable.charizard),
-            new Pokemon("Psyduck", R.drawable.settings_ic_edit),
-            new Pokemon("Snorlax", R.drawable.charizard),
-            new Pokemon("Mewtwo", R.drawable.settings_ic_edit),
-            new Pokemon("Bulbasaur", R.drawable.charizard),
-            new Pokemon("Charmander", R.drawable.settings_ic_edit),
-            new Pokemon("Squirtle", R.drawable.charizard),
-            new Pokemon("Pikachu", R.drawable.settings_ic_edit),
-            new Pokemon("Eevee", R.drawable.charizard),
-            new Pokemon("Jigglypuff", R.drawable.settings_ic_edit),
-            new Pokemon("Meowth", R.drawable.charizard),
-            new Pokemon("Psyduck", R.drawable.settings_ic_edit),
-            new Pokemon("Snorlax", R.drawable.charizard),
-            new Pokemon("Mewtwo", R.drawable.settings_ic_edit),
-            new Pokemon("Bulbasaur", R.drawable.charizard),
-            new Pokemon("Charmander", R.drawable.settings_ic_edit),
-            new Pokemon("Squirtle", R.drawable.charizard),
-            new Pokemon("Pikachu", R.drawable.settings_ic_edit),
-            new Pokemon("Eevee", R.drawable.charizard),
-            new Pokemon("Jigglypuff", R.drawable.settings_ic_edit),
-            new Pokemon("Meowth", R.drawable.charizard),
-            new Pokemon("Psyduck", R.drawable.settings_ic_edit),
-            new Pokemon("Snorlax", R.drawable.charizard),
-            new Pokemon("Mewtwo", R.drawable.settings_ic_edit)
-    );
+    private AppSharedPreferences appSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +31,29 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
 
-        myRecyclerView = findViewById(R.id.myRecyclerView);
-        myAdapter = new MyAdapter(pokemonList);
+        appSharedPreferences = new AppSharedPreferences(this);
 
-        myRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        myRecyclerView.setAdapter(myAdapter);
+        Toolbar toolbar = findViewById(R.id.myToolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Pokemon List");
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        NavController navController = navHostFragment.getNavController();
+
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+
+        Log.d("JIANDDEBUG", "Is Logged In: " + appSharedPreferences.getIsLoggedIn());
+        Log.d("JIANDDEBUG", "Primary Color" + appSharedPreferences.getPrimaryColor());
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        getOnBackPressedDispatcher().onBackPressed();
+        return true;
     }
 }

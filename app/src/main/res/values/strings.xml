@@ -2,4 +2,6 @@
     <string name="app_name">My Awesome Resume</string>
     <string name="greetings">Hello</string>
     <string name="lipsum"><i>Lorem ipsum</i> dolor sit amet, consectetur <b><u>adipiscing elit</u></b>. Nunc placerat lorem vitae magna euismod tempus. Suspendisse odio urna, facilisis non <b>vehicula</b> sit amet, ultricies volutpat arcu. Vivamus luctus quis tellus ac feugiat. Proin dapibus neque tortor, nec dignissim dolor fringilla ac. Quisque a rhoncus orci, eu fringilla sapien. Ut venenatis erat nec nisi dignissim, interdum posuere est bibendum. Cras quis laoreet velit. Nunc non ornare felis. Aliquam id diam eu mauris egestas elementum. Praesent ullamcorper laoreet eros et maximus. Suspendisse pellentesque sollicitudin lorem, a luctus odio ullamcorper id. Sed libero dolor, euismod ut tempor et, tincidunt eu lorem. Aliquam non ultricies eros. Ut laoreet finibus neque, ac elementum ligula ornare ullamcorper.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
