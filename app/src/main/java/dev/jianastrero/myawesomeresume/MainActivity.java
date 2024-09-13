@@ -17,8 +17,11 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 
+import dev.jianastrero.myawesomeresume.model.Pokemon;
 import dev.jianastrero.myawesomeresume.sp.AppSharedPreferences;
+import dev.jianastrero.myawesomeresume.util.AssetUtil;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,13 +50,29 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        Log.d("JIANDDEBUG", "Is Logged In: " + appSharedPreferences.getIsLoggedIn());
-        Log.d("JIANDDEBUG", "Primary Color" + appSharedPreferences.getPrimaryColor());
+//        Log.d("JIANDDEBUG", "Is Logged In: " + appSharedPreferences.getIsLoggedIn());
+//        Log.d("JIANDDEBUG", "Primary Color" + appSharedPreferences.getPrimaryColor());
+
+        parseJson();
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         getOnBackPressedDispatcher().onBackPressed();
         return true;
+    }
+
+    private void parseJson() {
+        String pokemonJson = AssetUtil.getJson(this, "bulbasaur.json");
+        Log.d("JIANDDEBUG", "Json: " + pokemonJson);
+        Gson gson = new Gson();
+        Pokemon pokemon = gson.fromJson(pokemonJson, Pokemon.class);
+        Log.d("JIANDDEBUG", "Pokemon: " + pokemon.name.english);
+        /*
+        Pokemon: Bulbasaur
+         */
+        /*
+        Pokemon: Bulbasaur
+         */
     }
 }

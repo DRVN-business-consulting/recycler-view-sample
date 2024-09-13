@@ -1,27 +1,19 @@
 package dev.jianastrero.myawesomeresume.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+
 public class Pokemon {
-    private String name;
-    private int imageResId;
-
-    public Pokemon(String name, int imageResId) {
-        this.name = name;
-        this.imageResId = imageResId;
-    }
-
-    public int getImageResId() {
-        return imageResId;
-    }
-
-    public void setImageResId(int imageResId) {
-        this.imageResId = imageResId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    public int id;
+    public Name name;
+    public ArrayList<String> type;
+    public Base base;
+    public String species;
+    public String description;
+    public Evolution evolution;
+    public Profile profile;
+    public Image image;
 }
+
+
