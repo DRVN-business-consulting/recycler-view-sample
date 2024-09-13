@@ -18,6 +18,10 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 import dev.jianastrero.myawesomeresume.model.Pokemon;
 import dev.jianastrero.myawesomeresume.sp.AppSharedPreferences;
@@ -63,16 +67,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void parseJson() {
-        String pokemonJson = AssetUtil.getJson(this, "bulbasaur.json");
-        Log.d("JIANDDEBUG", "Json: " + pokemonJson);
+        String pokemonJson = AssetUtil.getJson(this, "pokedex.json");
+//        Log.d("JIANDDEBUG", "Json: " + pokemonJson);
         Gson gson = new Gson();
-        Pokemon pokemon = gson.fromJson(pokemonJson, Pokemon.class);
-        Log.d("JIANDDEBUG", "Pokemon: " + pokemon.name.english);
+//        Pokemon pokemon = gson.fromJson(pokemonJson, Pokemon.class);
+//        gson.fromJson(pokemonJson, List<Pokemon>.class);
+//        Log.d("JIANDDEBUG", "Pokemon: " + pokemon.name.english);
+
+        TypeToken pokemonListTypeToken = new TypeToken<List<Pokemon>>() {};
+        Type pokemonListType = pokemonListTypeToken.getType();
+
+        List<Pokemon> pokemonList = gson.fromJson(pokemonJson, pokemonListType);
+
+        Log.d("JIANDDEBUG", "Pokemon size: " + pokemonList.size());
         /*
-        Pokemon: Bulbasaur
-         */
-        /*
-        Pokemon: Bulbasaur
+        Pokemon size: 898
          */
     }
 }
